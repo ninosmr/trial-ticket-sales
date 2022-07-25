@@ -6,13 +6,13 @@
 	},
 	"item": [
 		{
-			"name": "localhost:8080/buyTicket",
+			"name": "localhost:8080/registerNewUser",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n{ \"Purchase\" :\r\n    {\r\n    \"purchaserId\": 2,\r\n    \"purchaserCardId\": 4,\r\n    \"seatId\": 14,\r\n    \"eventId\": 9\r\n    }\r\n}",
+					"raw": "{\r\n   \"New\": {\r\n       \"newUserName\" : \"John Mulaney\",\r\n       \"newUserEmail\" : \"testEmail@bme.hu\",\r\n       \"newDeviceHash\" : \"k2453l23j4h5kljh\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,27 +20,43 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/buyTicket",
+					"raw": "localhost:8080/registerNewUser",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"buyTicket"
+						"registerNewUser"
 					]
 				},
-				"description": "test insufficient card funds"
+				"description": "register a new test user"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:8080/buyTicket",
+			"name": "localhost:8080/registerNewCard",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "requesterid",
+						"value": "1",
+						"type": "default"
+					},
+					{
+						"key": "requesterdeviceid",
+						"value": "2",
+						"type": "default"
+					},
+					{
+						"key": "usertoken",
+						"value": "dGVzdEVtYWlsQGJtZS5odSYxJmsyNDUzbDIzajRoNWtsamg=",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n{ \"Purchase\" :\r\n    {\r\n    \"purchaserId\": 1,\r\n    \"purchaserCardId\": 3,\r\n    \"seatId\": 11,\r\n    \"eventId\": 8\r\n    }\r\n}\r\n",
+					"raw": "{ \"Card\" :\r\n    { \r\n        \"ownerId\" : 1,\r\n        \"ownerNameOnCard\" : \"John Mulaney\",\r\n        \"cardNumber\" : \"1039487102341234\",\r\n        \"amountOnCard\" : \"234000\",\r\n        \"fundsCurrency\" : \"HUF\",\r\n        \"cardCvc\" : \"412\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,16 +64,44 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/buyTicket",
+					"raw": "localhost:8080/registerNewCard",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"buyTicket"
+						"registerNewCard"
 					]
 				},
-				"description": "test buying ticket success"
+				"description": "validate new user's hash, and register a card to them"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/registerNewEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"Event\" :\r\n    {\r\n        \"eventTitle\" : \"Coachella 22\",\r\n        \"eventLocation\" : \"Nevada Desert\",\r\n        \"eventStartTimeStamp\" : 633878223,\r\n        \"eventEndTimeStamp\" : 633879223,\r\n        \"seatsToAdd\" :\r\n            [\r\n                {\"reserved\" : false,\"ticketPrice\" : 12000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 13000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 15000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 16000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 17000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 18000} \r\n            ]\r\n    }\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/registerNewEvent",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registerNewEvent"
+					]
+				},
+				"description": "register a new event with seats"
 			},
 			"response": []
 		},
@@ -106,34 +150,6 @@
 			"response": []
 		},
 		{
-			"name": "localhost:8080/registerNewEvent",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{ \"Event\" :\r\n    {\r\n        \"eventTitle\" : \"Coachella 22\",\r\n        \"eventLocation\" : \"Nevada Desert\",\r\n        \"eventStartTimeStamp\" : 633878223,\r\n        \"eventEndTimeStamp\" : 633879223,\r\n        \"seatsToAdd\" :\r\n            [\r\n                {\"reserved\" : false,\"ticketPrice\" : 12000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 13000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 15000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 16000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 17000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 18000} \r\n            ]\r\n    }\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/registerNewEvent",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"registerNewEvent"
-					]
-				},
-				"description": "register a new event with seats"
-			},
-			"response": []
-		},
-		{
 			"name": "localhost:8080/getUserById/1",
 			"request": {
 				"method": "GET",
@@ -150,6 +166,44 @@
 					]
 				},
 				"description": "get first registered user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/getUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getUsers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getUsers"
+					]
+				},
+				"description": "get all users"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/getEvents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getEvents",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getEvents"
+					]
+				},
+				"description": "get all events"
 			},
 			"response": []
 		}
