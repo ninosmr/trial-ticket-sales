@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "44f20233-c34e-4ca5-8473-ae6b964b1c82",
+		"name": "TicketApiTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/buyTicket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{ \"Purchase\" :\r\n    {\r\n    \"purchaserId\": 2,\r\n    \"purchaserCardId\": 4,\r\n    \"seatId\": 14,\r\n    \"eventId\": 9\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/buyTicket",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"buyTicket"
+					]
+				},
+				"description": "test insufficient card funds"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/buyTicket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{ \"Purchase\" :\r\n    {\r\n    \"purchaserId\": 1,\r\n    \"purchaserCardId\": 3,\r\n    \"seatId\": 11,\r\n    \"eventId\": 8\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/buyTicket",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"buyTicket"
+					]
+				},
+				"description": "test buying ticket success"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/buyTicket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "requesterId",
+						"value": "16",
+						"type": "default"
+					},
+					{
+						"key": "requesterDeviceId",
+						"value": "17",
+						"type": "default"
+					},
+					{
+						"key": "userToken",
+						"value": "dGVzdEVtYWlsQGJtZS5odSYxNiZrMjQ1M2wyM2o0aDVrbGpo",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{ \"Purchase\" :\r\n    {\r\n    \"purchaserId\": 16,\r\n    \"purchaserCardId\":19,\r\n    \"seatId\": 14,\r\n    \"eventId\": 9\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/buyTicket",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"buyTicket"
+					]
+				},
+				"description": "buy ticket with auth"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/registerNewEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"Event\" :\r\n    {\r\n        \"eventTitle\" : \"Coachella 22\",\r\n        \"eventLocation\" : \"Nevada Desert\",\r\n        \"eventStartTimeStamp\" : 633878223,\r\n        \"eventEndTimeStamp\" : 633879223,\r\n        \"seatsToAdd\" :\r\n            [\r\n                {\"reserved\" : false,\"ticketPrice\" : 12000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 13000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 15000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 16000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 17000} ,\r\n                {\"reserved\" : false,\"ticketPrice\" : 18000} \r\n            ]\r\n    }\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/registerNewEvent",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registerNewEvent"
+					]
+				},
+				"description": "register a new event with seats"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/getUserById/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getUserById/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getUserById",
+						"1"
+					]
+				},
+				"description": "get first registered user"
+			},
+			"response": []
+		}
+	]
+}

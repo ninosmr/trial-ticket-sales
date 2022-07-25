@@ -146,6 +146,8 @@ public class EventService {
             seatsList.add(temp);
         }
         seatRepository.saveAll(seatsList);
+        eventToCreate.addSeats(seatsList);
+        eventDataRepository.save(eventToCreate);
 
         return new ResponseEntity<>(MessageConstants.EVENT_CREATED_OK, HttpStatus.OK);
     }
